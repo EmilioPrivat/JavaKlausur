@@ -1,38 +1,77 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class university {
+public class University {
 
     static List<Professors> professors = new ArrayList<>();
     static List<Courses> courses = new ArrayList<>();
     static List<Faculty> faculties = new ArrayList<>();
+    static List<Student> students = new ArrayList<>();
 
-    public static void test(){
+    public static void test() {
 
-       Professors Emilio = new Professors("Emilio");
-       professors.add(Emilio);
-       System.out.println("Succesfully added professor " + professors);
+        Faculty Informatik = new Faculty("Informatik");
+        Faculty Elektrotechnick = new Faculty("Elektrotechnik");
+        Faculty Wirtschaftswissenschaften = new Faculty("Wirtschaftswissenschaften");
+        Faculty Medizin = new Faculty("Medizin");
+        Faculty Naturwissenschaften = new Faculty("Naturwissenschaften");
 
-       Professors Malte = new Professors("Malte");
-       professors.add(Malte);
-       System.out.println("Succesfully added professor " + professors);
+        Student Emilio = new Student("Emilio", Informatik, 1);
+        Student Duane = new Student("Duane", Informatik, 1);
+        Student Kerem = new Student("Kerem", Medizin, 1);
+        Student Florian = new Student("Florian", Medizin, 1);
 
-       Faculty Mathematik = new Faculty("Mathematik");
-       faculties.add(Mathematik);
-       System.out.println("Succesfully added faculty " + faculties);
+        Professors Malte = new Professors("Malte", Informatik);
+        Professors Lisa = new Professors("Lisa", Naturwissenschaften);
 
-       Courses Mathe = new Courses("Mathe", Mathematik, Malte);
-       courses.add(Mathe);
-       System.out.println("Succesfully added Course " + courses);
+        Courses EinfuehrungInDieInformatik = new Courses("Einfuehrung in die Informatik", 1);
+        Courses DesginThinking = new Courses("Design Thinking", 5);
+        Courses Java = new Courses("Java", 1);
+        Courses RequirementEngeneering = new Courses("Requirement Engeneering", 3);
 
+        Informatik.addCourse(EinfuehrungInDieInformatik);
+        Informatik.addCourse(DesginThinking);
+        Informatik.addCourse(Java);
 
-       System.out.println(Mathe);
+        Malte.addCourse(Java);
+        Malte.addCourse(EinfuehrungInDieInformatik);
+
+        Lisa.addCourse(DesginThinking);
+        Lisa.addCourse(RequirementEngeneering);
+
+        Emilio.enrollInCourse(RequirementEngeneering);
+        Emilio.enrollInCourse(Java);
+
+        Duane.enrollInCourse(DesginThinking);
+        Duane.enrollInCourse(EinfuehrungInDieInformatik);
+
+        Emilio.showCoursesInSemester(7);
+        Duane.showCoursesInSemester(5);
+
+        EinfuehrungInDieInformatik.setTime(1230);
+        EinfuehrungInDieInformatik.setDay("Tuesday");
+
+        Java.setTime(900);
+        Java.setDay("Monday");
+
+        Malte.showProfessorSchedule();
+
+        System.out.println(Malte.getCourses());
+        System.out.println(Lisa.getCourses());
+
+        Informatik.anzeigenAlleStudierenden();
+        Medizin.anzeigenAlleStudierenden();
+        Naturwissenschaften.anzeigenAlleStudierenden();
+
+        Emilio.showCourseAndFaculty(7);
+
+        Emilio.changeFaculty(Naturwissenschaften);
 
     }
 
     public static void main(String[] args) {
-        university University = new university();
-        university.test();
+        University University = new University();
+        University.test();
     }
 
 }
